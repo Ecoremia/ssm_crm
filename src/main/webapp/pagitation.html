@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<!--    JQUERY-->
+    <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+<!--    bootstrap-->
+    <link rel="stylesheet" type="text/css" href="jquery/bootstrap_3.3.0/css/bootstrap.min.css">
+    <script type="text/javascript" src="jquery/bootstrap_3.3.0/js/bootstrap.min.js"></script>
+<!--    pagination-->
+    <link rel="stylesheet" type="text/css" href="jquery/bs_pagination-master/css/jquery.bs_pagination.min.css">
+    <script type="text/javascript" src="jquery/bs_pagination-master/js/jquery.bs_pagination.min.js"></script>
+    <script type="text/javascript" src="jquery/bs_pagination-master/localization/en.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            $("#demo_pag1").bs_pagination({
+                currentPage:1,//当前页数
+                rowsPerPage:10,//每页显示的行数
+                totalRows:720,//总条数，可以由上下两个算出来，不用写
+                totalPages:72,//必传，要自己算好后传过来
+
+                visiblePageLinks: 10,//最多可以显示的卡片数
+
+                showGoToPage: false,
+                showRowsInfo: false,
+                showRowsPerPage: true,//是否显示"每页显示条数"部分
+
+                onChangePage:function (event,pageObj){
+                    alert(pageObj.currentPage);
+                    alert(pageObj.rowsPerPage);
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="demo_pag1"></div>
+</body>
+</html>

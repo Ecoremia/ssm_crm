@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <base th:href="${#request.getScheme()}+'://'+${#request.getServerName()}+
+	':'+${#request.getServerPort()}+${#request.getContextPath()}+'/'">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            $("#fileDownloadBtn").click(function (){
+                alert("请求发出")
+                window.location.href = "workbench/activity/fileDownload.do";
+            })
+        })
+    </script>
+</head>
+<body>
+<input type="button" id="fileDownloadBtn" value="下载"/>
+</body>
+</html>

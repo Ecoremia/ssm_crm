@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <base th:href="${#request.getScheme()}+'://'+${#request.getServerName()}+
+	':'+${#request.getServerPort()}+${#request.getContextPath()}+'/'">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="jquery/jquery-1.11.1-min.js"></script>
+    <script type="text/javascript" src="jquery/echars/echarts.min.js"></script>
+    <script type="text/javascript">
+        $(function (){
+            //在入口函数中发送异步请求
+            $.ajax({
+                url:"workbench/chart/transaction/queryStageCountGroupByStage.do",
+                type:"POST",
+                dataType:"JSON",
+                success:function (data){
+                    //初始化echarts实例
+                    var chartDom = document.getElementById('main');
+                    var myChart = echarts.init(chartDom);
+                    //指定图表的配置
+                    var option;
+                    option = {
+                        title: {
+                            text: '交易统计图表',
+                            subtext:"各个阶段的交易信息"
+                        },
+                        tooltip: {
+                            trigger: 'item',
+                            formatter: '{b} : {c}'
+                        },
+                        toolbox: {
+                            feature: {
+                                dataView: { readOnly: false },
+                                restore: {},
+                                saveAsImage: {}
+                            }
+                        },
+                        series: [
+                            {
+                                name: '阶段',
+                                type: 'funnel',
+                                left: '10%',
+                                width: '80%',
+                                label: {
+                                    formatter: '{b}'
+                                },
+                                labelLine: {
+                                    show: false
+                                },
+                                itemStyle: {
+                                    opacity: 0.8
+                                },
+                                emphasis: {
+                                    label: {
+                                        position: 'inside',
+                                        formatter: '{b}: {c}%'
+                                    }
+                                },
+                                data: data
+                            }
+                        ]
+                    };
+
+                    option && myChart.setOption(option);
+                }
+            })
+        })
+    </script>
+</head>
+<body>
+<div id="main" style="width: 600px;height:400px;"></div>
+</body>
+</html>
